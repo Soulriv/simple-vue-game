@@ -1,0 +1,9 @@
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+}
+.logs {
+  margin: 5px;
+  padding: 5px;
+  font-weight: bolder;
+}

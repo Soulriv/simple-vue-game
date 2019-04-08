@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+  <link href="./css/style.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+</head>
+<body>
+<div id="app">
+  <v-app>
+    <v-content>
+      <v-container fluid>
+        <v-layout row>
+          <v-flex xs6 row class="text-xs-center">
+            <h3>You</h3>
+            <v-container>
+              <v-layout row align-center justify-center>
+                <v-flex xs2>
+                  {{ playerHealth }}
+                </v-flex>
+                <v-flex xs10>
+                  <v-progress-linear
+                    color="success"
+                    height="20"
+                    :value="playerHealth"
+                  ></v-progress-linear>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-flex>
+          <v-flex xs6 class="text-xs-center" justify-center>
+            <h3>Goblin</h3>
+            <v-container>
+              <v-layout row align-center justify-center>
+                <v-flex xs2>
+                  {{ monsterHealth }}
+                </v-flex>
+                <v-flex xs10>
+                  <v-progress-linear
+                    color="success"
+                    height="20"
+                    :value="monsterHealth"
+                  ></v-progress-linear>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-flex>
+        </v-layout>
+        <v-layout row v-if="!gameIsRunning">
+          <v-flex class="text-xs-center" xs12>
+            <v-btn @click="startGame">Start New Game</v-btn>
+          </v-flex>
+        </v-layout>
+        <v-layout row v-else>
+          <v-flex xs12 class="text-xs-center">
+            <v-btn color="error" id="attack" @click="attack">Attack</v-btn>
+            <v-btn color="warning" id="special-attack" @click="specialAttack">Special Attack</v-btn>
+            <v-btn color="success" id="heal" @click="heal">Heal</v-btn>
+            <v-btn id="run" @click="run">Run</v-btn>
+          </v-flex>
+        </v-layout>
+        <v-layout row v-if="turns.length > 0">
+          <v-flex class="text-xs-center">
+            <v-list>
+              <li class="logs" v-for="turn in turns" :class="{ 'blue accent-1': turn.isPlayer, 'red accent-1': !turn.isPlayer}">
+                {{ turn.message }}
+              </li>
+            </v-list>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-content>
+  </v-app>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
+<script src="./js/app.js"></script>
+</body>
+</html>
